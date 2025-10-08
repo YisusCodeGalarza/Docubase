@@ -1,0 +1,52 @@
+{% extends 'docubase_app/base.html' %}
+{% load l10n %}
+
+{% block title %}{{ proyecto.titulo }}{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h1 class="display-4 fw-bold mb-0">{{ proyecto.titulo }}</h1>
+                {% if user.is_authenticated and user.username == proyecto.autor.username %}
+                <a href="{% url 'editar_proyecto' proyecto_slug=proyecto.slug %}" class="btn btn-outline-primary btn-sm">
+                    <i class="fas fa-edit me-1"></i> Editar
+                </a>
+                {% endif %}
+            </div>
+
+            {% if proyecto.imagen %}
+            <img src="{{ proyecto.imagen.url }}" alt="{{ proyecto.titulo }}" class="img-fluid rounded-3 mb-4">
+            {% endif %}
+
+            <p class="lead text-muted">{{ proyecto.descripcion|safe }}</p>
+            <hr>
+            <p class="text-muted">Autor: {{ proyecto.autor.username }}
+                | Última actualización:
+                {{ proyecto.fecha_actualizacion|date:"j \d\e F \d\e Y \a \l\a\s H:i" }}</p>
+            <hr class="my-4">
+
+            <h2 class="mt-5">Páginas de este proyecto</h2>
+            {% if user.is_authenticated %}
+            <div class="d-flex justify-content-end mb-3">
+                <a href="{% url 'crear_pagina' proyecto_slug=proyecto.slug %}" class="btn btn-outline-primary">
+                    <i class="fas fa-plus-circle me-2"></i>Nueva Página
+                </a>
+            </div>
+             {% endif %}
+            <div class="list-group">
+                {% for pagina in paginas %}
+                <a href="{% url 'pagina_detalle' proyecto_slug=proyecto.slug pagina_slug=pagina.slug %}"
+                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    {{ pagina.titulo }}
+                    <span class="badge bg-primary rounded-pill">{{ pagina.fecha_actualizacion|date:"j M" }}</span>
+                </a>
+                {% empty %}
+                <p>No hay páginas en este proyecto.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'docubase_app/base.html' %}
+{% load static %}
+{% load proyecto_filters %}
+
+{% block title %}Proyectos - DocuBase{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="mb-4">Todos los Proyectos</h1>
+    <p class="lead text-muted">Explora documentación técnica de nuestra comunidad.</p>
+    <hr>
+    
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-8">
+            <form action="{% url 'buscar_proyectos' %}" method="get">
+                <div class="search-glass">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="form-control form-control-lg"
+                        placeholder="Buscar por Título o por Autor" name="q" value="{{ query|default_if_none:'' }}">
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+        {% for proyecto in proyectos %}
+        <div class="col">
+            <a href="{% url 'proyecto_detalle' proyecto_slug=proyecto.slug %}" class="card-link">
+                <div class="card h-100 shadow-sm card-hover">
+                    {% if proyecto.imagen %}
+                    <img src="{{ proyecto.imagen.url }}" class="card-img-top card-img-top-fixed" alt="{{ proyecto.titulo }}">
+                    {% endif %}
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">{{ proyecto.titulo }}</h5>
+                        <div class="card-text text-muted card-text-clamp">
+                            {{ proyecto.descripcion|clean_description:120 }}
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent pt-0 mt-auto">
+                        <small class="text-muted d-block mb-2">Autor: {{ proyecto.autor.username }}</small>
+                        <span class="btn btn-outline-primary btn-sm w-100">Ver Proyecto</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% empty %}
+        <p>No hay proyectos disponibles.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

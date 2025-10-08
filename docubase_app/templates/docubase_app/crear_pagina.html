@@ -1,0 +1,42 @@
+{% extends 'docubase_app/base.html' %}
+{% load static %}
+
+{% block title %}Crear Página{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card p-4 shadow-sm">
+                <h2 class="card-title text-center mb-4">Crear una Nueva Página</h2>
+                <h5 class="text-center text-muted mb-4">para el proyecto: {{ proyecto.titulo }}</h5>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="id_titulo" class="form-label">Título</label>
+                        {{ form.titulo }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_contenido" class="form-label">Contenido</label>
+                        {{ form.contenido }}
+                    </div>
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {% for error in form.non_field_errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <button type="submit" class="btn btn-gradient w-100 mt-3">Crear Página</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.onload = function() {
+        CKEDITOR.replace('id_contenido');
+    };
+</script>
+{% endblock %}

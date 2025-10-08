@@ -1,0 +1,248 @@
+{% extends 'docubase_app/base.html' %}
+{% load static %}
+{% load proyecto_filters %}
+
+{% block title %}DocuBase - Documentación Técnica Modular{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="hero-content fade-in-up">
+            <div class="hero-badge">
+                <i class="fas fa-star"></i>
+                <span>Plataforma líder en documentación técnica</span>
+            </div>
+            
+            <h1 class="hero-title">
+                Documentación que 
+                <span class="accent">impulsa</span>
+                el desarrollo
+            </h1>
+            
+            <p class="hero-description">
+                Crea, organiza y comparte documentación técnica modular con tu equipo. 
+                Más de 10,000 desarrolladores confían en DocuBase para mantener su 
+                documentación siempre actualizada y accesible.
+            </p>
+            
+            <div class="hero-actions">
+                <a href="{% url 'register' %}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-rocket"></i>
+                    Comenzar Gratis
+                </a>
+                <a href="{% url 'proyectos_lista' %}" class="btn btn-outline btn-lg">
+                    <i class="fas fa-play-circle"></i>
+                    Ver Demo
+                </a>
+            </div>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">10K+</span>
+                    <span class="stat-label">Desarrolladores</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50K+</span>
+                    <span class="stat-label">Módulos</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">99.9%</span>
+                    <span class="stat-label">Uptime</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">4.9/5</span>
+                    <span class="stat-label">Rating</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Search Section -->
+<section class="search-section">
+    <div class="container">
+        <div class="search-container">
+            <h3 class="mb-3">Encuentra soluciones técnicas al instante</h3>
+            <form action="{% url 'buscar_proyectos' %}" method="get" class="search-box">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" 
+                       placeholder="Buscar en 50,000+ módulos de documentación..." 
+                       name="q">
+            </form>
+            <div class="search-tags">
+                <a href="#" class="project-tag">#API</a>
+                <a href="#" class="project-tag">#React</a>
+                <a href="#" class="project-tag">#Python</a>
+                <a href="#" class="project-tag">#DevOps</a>
+                <a href="#" class="project-tag">#Database</a>
+                <a href="#" class="project-tag">#Mobile</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section">
+    <div class="container">
+        <div class="section-header fade-in-up">
+            <h2 class="section-title">Diseñado para equipos técnicos</h2>
+            <p class="section-subtitle">
+                Todas las herramientas que necesitas para crear documentación 
+                excepcional, en una sola plataforma.
+            </p>
+        </div>
+        
+        <div class="features-grid stagger-animation">
+            <!-- Feature 1 -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <h3>Arquitectura Modular</h3>
+                <p>
+                    Organiza tu documentación en módulos independientes que 
+                    pueden reutilizarse en múltiples proyectos.
+                </p>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>CKEditor 5 Avanzado</h3>
+                <p>
+                    Editor con sintaxis extendida, soporte para diagramas y 
+                    vista previa en tiempo real.
+                </p>
+            </div>
+            
+            <!-- Feature 3 -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>Búsqueda Inteligente</h3>
+                <p>
+                    Encuentra lo que necesitas al instante con búsqueda 
+                    semántica que entiende el contexto técnico.
+                </p>
+            </div>
+            
+            <!-- Feature 4 -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Colaboración en Tiempo Real</h3>
+                <p>
+                    Trabaja con tu equipo simultáneamente con comentarios, 
+                    sugerencias y control de cambios.
+                </p>
+            </div>
+            
+            <!-- Feature 5 -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Control de Acceso</h3>
+                <p>
+                    Gestiona permisos granulares y mantén tu documentación 
+                    segura con autenticación avanzada.
+                </p>
+            </div>
+            
+            <!-- Feature 6 -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Rendimiento Optimizado</h3>
+                <p>
+                    Carga instantánea y búsqueda en milisegundos, incluso 
+                    con grandes volúmenes de documentación.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="projects-section">
+    <div class="container">
+        <div class="section-header fade-in-up">
+            <h2 class="section-title">Proyectos de la Comunidad</h2>
+            <p class="section-subtitle">
+                Descubre documentación técnica creada por desarrolladores 
+                innovadores de todo el mundo.
+            </p>
+        </div>
+        
+        {% if proyectos_recientes %}
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 stagger-animation">
+            {% for proyecto in proyectos_recientes %}
+            <div class="col">
+                <a href="{% url 'proyecto_detalle' proyecto_slug=proyecto.slug %}" class="card-link">
+                    <div class="card h-100 shadow-sm card-hover">
+                        {% if proyecto.imagen %}
+                        <div class="card-img-container">
+                            <img src="{{ proyecto.imagen.url }}" class="card-img-top" alt="{{ proyecto.titulo }}">
+                        </div>
+                        {% endif %}
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title fw-bold">{{ proyecto.titulo }}</h5>
+                            <div class="card-text text-muted card-text-clamp">
+                                {{ proyecto.descripcion|clean_description:100 }}
+                            </div>
+                            {% if proyecto.etiquetas.all %}
+                            <div class="project-tags mt-auto pt-3">
+                                {% for tag in proyecto.etiquetas.all|slice:":3" %}
+                                <span class="project-tag">{{ tag.nombre }}</span>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Por: {{ proyecto.autor.username }}</small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        <div class="text-center mt-5">
+            <a href="{% url 'proyectos_lista' %}" class="btn btn-outline">
+                <i class="fas fa-folder-open"></i>
+                Explorar Todos los Proyectos
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content fade-in-up">
+            <h2 class="cta-title">Comienza hoy mismo</h2>
+            <p class="cta-description">
+                Únete a miles de desarrolladores que ya están creando 
+                documentación excepcional con DocuBase.
+            </p>
+            <div class="cta-actions">
+                <a href="{% url 'register' %}" class="btn btn-accent btn-lg">
+                    <i class="fas fa-user-plus"></i>
+                    Crear Cuenta Gratis
+                </a>
+                <a href="{% url 'proyectos_lista' %}" class="btn btn-outline btn-lg" style="background: transparent; border-color: var(--gray-400); color: var(--gray-300);">
+                    <i class="fas fa-play"></i>
+                    Ver Demo Interactivo
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
