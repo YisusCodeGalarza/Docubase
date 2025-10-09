@@ -14,11 +14,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-!$v6#y34g)z(e5^a4bign)a!e1&6c!0-*r1ql^91@njo1dl@k&')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG es 'False' en producción. Será 'True' solo si la variable de entorno RENDER está presente
-# y su valor no es 'true'. Para desarrollo local, donde RENDER no existe, será True.
+# DEBUG es 'False' en producción (cuando se ejecuta en Render) y 'True' en local.
 DEBUG = 'RENDER' not in os.environ
 
-ALLOWED_HOSTS = []
+# Hosts permitidos. Se añade el de Render automáticamente.
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
@@ -75,19 +75,19 @@ WSGI_APPLICATION = 'docubase_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# Lógica para seleccionar la base de datos
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+# Si la variable DATABASE_URL existe (en Render), la usa.
 if 'DATABASE_URL' in os.environ:
-    # Configuración para producción (Render)
-    DATABASES = {
-        'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
-    }
-else:
-    # Configuración para desarrollo local
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+    DATABASES['default'] = dj_database_url.config(
+        conn_max_age=600, ssl_require=True
+    )
 
 
 # Password validation
