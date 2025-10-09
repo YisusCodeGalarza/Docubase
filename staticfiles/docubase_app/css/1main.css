@@ -1,0 +1,243 @@
+/* ===== VARIABLES CSS (Custom Properties) ===== */
+:root {
+    /* Colores principales de la paleta */
+    --primary: #667eea;        /* Azul primario */
+    --primary-dark: #5a6fd8;   /* Azul más oscuro para hover/states */
+    --secondary: #764ba2;      /* Morado secundario */
+    --accent: #f093fb;         /* Rosa acento */
+    --light: #f8f9fa;          /* Fondo claro */
+    --dark: #2d3748;           /* Texto oscuro */
+    --success: #48bb78;        /* Verde para éxito */
+    --warning: #ed8936;        /* Naranja para advertencias */
+    --danger: #f56565;         /* Rojo para errores */
+}
+
+/* ===== ESTILOS BASE ===== */
+body {
+    font-family: 'Inter', sans-serif;  /* Fuente principal */
+    background: #ffffff;               /* Fondo blanco */
+    color: var(--dark);                /* Color de texto usando variable */
+}
+
+/* ===== UTILITIES Y EFECTOS ===== */
+
+/* Fondo con gradiente lineal */
+.gradient-bg {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+}
+
+/* Texto con efecto de gradiente */
+.gradient-text {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;     /* Clip del fondo al texto (Webkit) */
+    -webkit-text-fill-color: transparent; /* Texto transparente para mostrar gradiente */
+    background-clip: text;             /* Clip del fondo al texto (estándar) */
+}
+
+/* Efectos hover para tarjetas */
+.card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Transición suave */
+    border: none;                      /* Sin borde */
+    border-radius: 12px;               /* Bordes redondeados */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Sombra suave */
+}
+
+/* Estado hover de las tarjetas */
+.card-hover:hover {
+    transform: translateY(-8px);       /* Efecto de levitación */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* Sombra más intensa */
+}
+
+/* Botón con gradiente */
+.btn-gradient {
+    background: linear-gradient(135deg, var(--primary), var(--secondary)); /* Fondo gradiente */
+    border: none;                      /* Sin borde */
+    color: white;                      /* Texto blanco */
+    font-weight: 500;                  /* Grosor de fuente medio */
+    padding: 0.75rem 2rem;             /* Espaciado interno */
+    border-radius: 50px;               /* Bordes completamente redondeados */
+    transition: all 0.3s ease;         /* Transición suave */
+}
+
+/* Efecto hover para botón gradiente */
+.btn-gradient:hover {
+    transform: translateY(-2px);       /* Levanta ligeramente el botón */
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3); /* Sombra con color primario */
+    color: white;                      /* Mantiene texto blanco */
+}
+
+/* ===== COMPONENTES ===== */
+
+/* Estilo para la marca de la navbar */
+.navbar-brand {
+    font-weight: 700;                  /* Texto en negrita */
+    font-size: 1.5rem;                 /* Tamaño de fuente grande */
+}
+
+/* Sección hero principal */
+.hero-section {
+    min-height: 80vh;                  /* Altura mínima del 80% del viewport */
+    display: flex;                     /* Flexbox para centrado */
+    align-items: center;               /* Centrado vertical */
+    position: relative;                /* Posición relativa para pseudo-elementos */
+    overflow: hidden;                  /* Oculta contenido que se sale */
+}
+
+/* Fondo decorativo para hero section */
+.hero-section::before {
+    content: '';                       /* Contenido vacío necesario */
+    position: absolute;                /* Posición absoluta respecto al hero */
+    top: 0; left: 0; right: 0; bottom: 0; /* Cubre todo el contenedor */
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="%23ffffff10" points="0,1000 1000,0 1000,1000"/></svg>'); /* SVG inline con triángulo blanco semi-transparente */
+    background-size: cover;            /* Cubre todo el espacio */
+}
+
+/* Etiquetas o tags */
+.tag {
+    display: inline-flex;              /* Flex inline para alineación */
+    align-items: center;               /* Centrado vertical de contenido */
+    padding: 0.35em 0.8em;            /* Espaciado interno */
+    border-radius: 20px;               /* Bordes redondeados tipo píldora */
+    font-size: 0.75rem;                /* Texto pequeño */
+    font-weight: 500;                  /* Grosor de fuente medio */
+    margin-right: 0.5em;               /* Margen derecho entre tags */
+    margin-bottom: 0.5em;              /* Margen inferior */
+}
+
+/* Contenedor de búsqueda con icono */
+.search-glass {
+    position: relative;                /* Posición relativa para el icono absoluto */
+}
+
+/* Input de búsqueda */
+.search-glass input {
+    padding-left: 3rem;                /* Espacio para el icono a la izquierda */
+    border-radius: 50px;               /* Bordes completamente redondeados */
+    border: 2px solid #e2e8f0;         /* Borde gris claro */
+    transition: all 0.3s ease;         /* Transición suave para efectos */
+}
+
+/* Estado focus del input de búsqueda */
+.search-glass input:focus {
+    border-color: var(--primary);      /* Borde con color primario al enfocar */
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); /* Sombra suave del color primario */
+}
+
+/* Icono de lupa en el search */
+.search-glass i {
+    position: absolute;                /* Posición absoluta dentro del contenedor */
+    left: 1.2rem;                      /* Posición desde la izquierda */
+    top: 50%;                          /* Centrado vertical */
+    transform: translateY(-50%);       /* Ajuste fino para centrado perfecto */
+    color: #a0aec0;                    /* Color gris para el icono */
+}
+
+/* Iconos de características */
+.feature-icon {
+    width: 80px;                       /* Ancho fijo */
+    height: 80px;                      /* Alto fijo (cuadrado) */
+    border-radius: 20px;               /* Bordes redondeados */
+    display: flex;                     /* Flex para centrar contenido */
+    align-items: center;               /* Centrado vertical */
+    justify-content: center;           /* Centrado horizontal */
+    margin: 0 auto 1.5rem;             /* Margen: 0 arriba, auto lados, 1.5rem abajo */
+    background: linear-gradient(135deg, var(--primary), var(--secondary)); /* Fondo gradiente */
+}
+
+/* Imágenes superiores de tarjetas con tamaño fijo */
+.card-img-top-fixed {
+    width: 100%;                       /* Ancho completo del contenedor */
+    height: 200px;                     /* Alto fijo */
+    object-fit: cover;                 /* Recorta la imagen para cubrir el espacio */
+}
+
+/* ===== SOLUCIÓN PARA DESCRIPCIONES EN TARJETAS ===== */
+/* Texto de tarjetas con límite de líneas y manejo de HTML */
+.card-text-clamp {
+    display: -webkit-box;              /* Modelo de caja flexible (Webkit) */
+    -webkit-line-clamp: 3;             /* Limita a 3 líneas (aumentado desde 2) */
+    line-clamp: 3;                     /* Compatibilidad futura */
+    -webkit-box-orient: vertical;      /* Orientación vertical del flexbox */
+    overflow: hidden;                  /* Oculta contenido excedente */
+    text-overflow: ellipsis;           /* Agrega "..." al final del texto truncado */
+    max-height: 4.8em;                 /* Altura máxima aproximada para 3 líneas */
+    font-size: 0.875rem;               /* Tamaño de texto pequeño */
+    line-height: 1.6;                  /* Interlineado cómodo para lectura */
+}
+
+/* Fuerza a que todo el contenido HTML sea texto plano */
+.card-text-clamp * {
+    display: inline !important;        /* Convierte todos los elementos en inline */
+    margin: 0 !important;              /* Elimina márgenes */
+    padding: 0 !important;             /* Elimina padding */
+    font-size: inherit !important;     /* Hereda tamaño de fuente del contenedor */
+    font-weight: inherit !important;   /* Hereda grosor de fuente */
+    line-height: inherit !important;   /* Hereda interlineado */
+    color: inherit !important;         /* Hereda color de texto */
+    background: transparent !important; /* Fondo transparente */
+    border: none !important;           /* Sin bordes */
+    text-decoration: none !important;  /* Sin subrayados */
+}
+
+/* Elimina saltos de línea */
+.card-text-clamp br {
+    display: none !important;          /* Oculta completamente los <br> */
+}
+
+/* Convierte listas en texto plano */
+.card-text-clamp ul,
+.card-text-clamp ol {
+    list-style: none !important;       /* Elimina viñetas y números */
+    padding-left: 0 !important;        /* Elimina sangría */
+}
+
+/* Estilo para elementos de lista */
+.card-text-clamp li {
+    display: inline !important;        /* Muestra elementos en línea */
+}
+
+/* Agrega comas después de cada elemento de lista */
+.card-text-clamp li:after {
+    content: ", ";                     /* Separa elementos con coma */
+}
+
+/* Elimina la coma después del último elemento */
+.card-text-clamp li:last-child:after {
+    content: "";                       /* Sin contenido después del último */
+}
+
+/* Mantiene negritas en títulos */
+.card-text-clamp h1,
+.card-text-clamp h2,
+.card-text-clamp h3,
+.card-text-clamp h4,
+.card-text-clamp h5,
+.card-text-clamp h6 {
+    font-weight: 600 !important;       /* Texto semi-negrita */
+}
+
+/* Mantiene negritas en texto */
+.card-text-clamp strong,
+.card-text-clamp b {
+    font-weight: 600 !important;       /* Texto semi-negrita */
+}
+
+/* Mantiene cursivas */
+.card-text-clamp em,
+.card-text-clamp i {
+    font-style: italic !important;     /* Texto en cursiva */
+}
+
+/* Convierte elementos de bloque en inline */
+.card-text-clamp p,
+.card-text-clamp div,
+.card-text-clamp section,
+.card-text-clamp article {
+    display: inline !important;        /* Elementos en línea */
+}
+
+/* ===== ENLACES DE TARJETAS ===== */
+.card-link {
+    text-decoration: none !important;  /* Elimina subrayado de enlaces */
+    color: inherit;                    /* Hereda color del texto padre */
+}
