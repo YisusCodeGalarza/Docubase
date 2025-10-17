@@ -125,7 +125,7 @@ USE_L10N = True
 
 
 # Static and Media files configuration
-STATIC_URL = 'static/'
+STATIC_URL = '/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'docubase_app', 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 

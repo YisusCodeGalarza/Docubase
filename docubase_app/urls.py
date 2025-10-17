@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import netaudit_verify
 from django.contrib.auth import views as auth_views
 
 
