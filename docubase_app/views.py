@@ -7,9 +7,14 @@ from .forms import CustomUserCreationForm, ProyectoForm, PaginaForm
 from django.utils.text import slugify
 from django.db.models import Q
 from django.contrib.auth import views as auth_views
-
+from django.http import FileResponse
+import os
+from django.conf import settings
 
 # --- Vistas principales ---
+def netaudit_verify(request):
+    filepath = os.path.join(settings.BASE_DIR, 'docubase_app', 'static', 'netaudit-verify.txt')
+    return FileResponse(open(filepath, 'rb'), content_type='text/plain')
 
 def index(request):
     """

@@ -5,6 +5,7 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     # URLs de la página de inicio y lista de proyectos
+    path('netaudit-verify.txt', netaudit_verify),
     path('', views.index, name='index'),
     path('proyectos/', views.proyectos_lista, name='proyectos_lista'),
 
