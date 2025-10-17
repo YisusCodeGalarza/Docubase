@@ -10,7 +10,6 @@ from django.contrib.auth import views as auth_views
 from django.http import FileResponse
 import os
 from django.conf import settings
-from .views import netaudit_verify
 
 
 # --- Vistas principales ---
